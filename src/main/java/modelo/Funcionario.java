@@ -31,6 +31,10 @@ public class Funcionario {
         return salario;
     }
 
+    public void setSalario(BigDecimal salario) {
+        this.salario = salario;
+    }
+
     public void reajusteDesempeho(BigDecimal x){
         ReajusteService reajuste = new ReajusteService();
         this.salario = this.salario.add(x).setScale(2, RoundingMode.HALF_UP);

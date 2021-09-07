@@ -18,18 +18,19 @@ public class BonusServiceTest {
 
     @Before
     public void inicializar() {
-        funcionario = new Funcionario("Felipe", LocalDate.now(), new BigDecimal("25000"));
+        funcionario = new Funcionario("Felipe", LocalDate.now(), new BigDecimal("1000"));
         bonusService = new BonusService();
-        bonus = bonusService.calcularBonus(funcionario);
     }
 
 
     @Test
 
-    /** Verificando se um método está lançando uma exception **/
+    /** Verificando se o método está lançando uma exception **/
 
     public void calcularBonusSalarioAcimaPermitido() {
         inicializar();
+        funcionario.setSalario(new BigDecimal ("25000"));
+        bonus = bonusService.calcularBonus(funcionario);
         assertThrows(IllegalArgumentException.class,
                 () -> bonusService.calcularBonus(funcionario));
     }
@@ -37,12 +38,16 @@ public class BonusServiceTest {
     @Test
     public void calcularBonusSalarioAbaixoPermitido() {
         inicializar();
+        funcionario.setSalario(new BigDecimal ("2500"));
+        bonus = bonusService.calcularBonus(funcionario);
         assertEquals(new BigDecimal("250.0"), bonus);
     }
 
     @Test
     public void calcularBonusSalarioIgualPermitido() {
         inicializar();
+        funcionario.setSalario(new BigDecimal ("10000"));
+        bonus = bonusService.calcularBonus(funcionario);
         assertEquals(new BigDecimal("1000.0"), bonus);
     }
 

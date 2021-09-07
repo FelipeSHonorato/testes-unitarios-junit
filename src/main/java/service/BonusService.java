@@ -8,8 +8,8 @@ public class BonusService {
 
     public BigDecimal calcularBonus(Funcionario funcionario){
         BigDecimal valor = funcionario.getSalario().multiply(new BigDecimal("0.1"));
-        if (valor.compareTo(new BigDecimal("1000"))>0){
-            throw new IllegalArgumentException(("Lança uma mensagem de erro"));
+        if (valor.compareTo(new BigDecimal("1000")) > 0){
+            throw new IllegalArgumentException("Esse funcionário não pode receber bonus");
         }
         return valor;
     }
