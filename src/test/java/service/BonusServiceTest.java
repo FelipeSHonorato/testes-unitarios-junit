@@ -5,14 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
-import javax.swing.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class BonusServiceTest {
 
@@ -21,19 +21,19 @@ public class BonusServiceTest {
     private BigDecimal bonus;
 
     @BeforeAll
-    public void iniciarTestes(){
+    public void iniciarTestes() {
         System.out.println("Iniciando testes unitários");
     }
 
     @AfterAll
-    public void finalizarTestes(){
+    public void finalizarTestes() {
         System.out.println("Finalizando testes unitários");
     }
 
     @Before
     public void inicializar() {
-       this.funcionario = new Funcionario("Felipe", LocalDate.now(), new BigDecimal("1000"));
-       this.bonusService = new BonusService();
+        this.funcionario = new Funcionario("Felipe", LocalDate.now(), new BigDecimal("1000"));
+        this.bonusService = new BonusService();
         System.out.println("Inicializando");
     }
 
@@ -43,7 +43,7 @@ public class BonusServiceTest {
     /** Verificando se o método está lançando uma exception **/
 
     public void calcularBonusSalarioAcimaPermitido() {
-        funcionario.setSalario(new BigDecimal ("25000"));
+        funcionario.setSalario(new BigDecimal("25000"));
         bonus = bonusService.calcularBonus(funcionario);
         assertThrows(IllegalArgumentException.class,
                 () -> bonusService.calcularBonus(funcionario));
@@ -51,14 +51,14 @@ public class BonusServiceTest {
 
     @Test
     public void calcularBonusSalarioAbaixoPermitido() {
-        funcionario.setSalario(new BigDecimal ("2500"));
+        funcionario.setSalario(new BigDecimal("2500"));
         bonus = bonusService.calcularBonus(funcionario);
         assertEquals(new BigDecimal("250.0"), bonus);
     }
 
     @Test
     public void calcularBonusSalarioIgualPermitido() {
-        funcionario.setSalario(new BigDecimal ("10000"));
+        funcionario.setSalario(new BigDecimal("10000"));
         bonus = bonusService.calcularBonus(funcionario);
         assertEquals(new BigDecimal("1000.0"), bonus);
     }

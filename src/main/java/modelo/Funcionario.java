@@ -4,7 +4,6 @@ import service.ReajusteService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.security.PublicKey;
 import java.time.LocalDate;
 
 public class Funcionario {
@@ -36,7 +35,10 @@ public class Funcionario {
     }
 
     public void reajusteDesempeho(BigDecimal x){
-        ReajusteService reajuste = new ReajusteService();
-        this.salario = this.salario.add(x).setScale(2, RoundingMode.HALF_UP);
+       this.salario = this.salario.add(x);
+       arrendondarSalario();
+    }
+    private void arrendondarSalario(){
+        this.salario.setScale(2, RoundingMode.HALF_UP);
     }
 }
