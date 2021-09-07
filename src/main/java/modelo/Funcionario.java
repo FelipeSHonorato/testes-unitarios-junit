@@ -1,5 +1,7 @@
 package modelo;
 
+import service.ReajusteService;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.PublicKey;
