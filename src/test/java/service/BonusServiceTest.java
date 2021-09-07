@@ -3,7 +3,11 @@ package service;
 import modelo.Funcionario;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,10 +20,21 @@ public class BonusServiceTest {
     private BonusService bonusService;
     private BigDecimal bonus;
 
+    @BeforeAll
+    public void iniciarTestes(){
+        System.out.println("Iniciando testes unitários");
+    }
+
+    @AfterAll
+    public void finalizarTestes(){
+        System.out.println("Finalizando testes unitários");
+    }
+
     @Before
     public void inicializar() {
-        funcionario = new Funcionario("Felipe", LocalDate.now(), new BigDecimal("1000"));
-        bonusService = new BonusService();
+       this.funcionario = new Funcionario("Felipe", LocalDate.now(), new BigDecimal("1000"));
+       this.bonusService = new BonusService();
+        System.out.println("Inicializando");
     }
 
 
@@ -28,7 +43,6 @@ public class BonusServiceTest {
     /** Verificando se o método está lançando uma exception **/
 
     public void calcularBonusSalarioAcimaPermitido() {
-        inicializar();
         funcionario.setSalario(new BigDecimal ("25000"));
         bonus = bonusService.calcularBonus(funcionario);
         assertThrows(IllegalArgumentException.class,
@@ -37,7 +51,6 @@ public class BonusServiceTest {
 
     @Test
     public void calcularBonusSalarioAbaixoPermitido() {
-        inicializar();
         funcionario.setSalario(new BigDecimal ("2500"));
         bonus = bonusService.calcularBonus(funcionario);
         assertEquals(new BigDecimal("250.0"), bonus);
@@ -45,7 +58,6 @@ public class BonusServiceTest {
 
     @Test
     public void calcularBonusSalarioIgualPermitido() {
-        inicializar();
         funcionario.setSalario(new BigDecimal ("10000"));
         bonus = bonusService.calcularBonus(funcionario);
         assertEquals(new BigDecimal("1000.0"), bonus);
